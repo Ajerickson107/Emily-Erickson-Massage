@@ -25,6 +25,7 @@ import {
   ClientIntakeStatus
 } from '../types';
 import { StorageService, formatDateReadable } from '../services/storage';
+import { FirestoreSync } from '../services/firestoreSync';
 import { SquarePaymentModal } from './SquarePaymentModal';
 
 interface BookingFlowProps {
@@ -240,6 +241,7 @@ export const BookingFlow: React.FC<BookingFlowProps> = ({
     };
 
     StorageService.saveAppointment(newAppointment);
+    FirestoreSync.syncAppointment(newAppointment).catch(err => console.warn('Firestore sync background notice:', err));
     setConfirmedAppointment(newAppointment);
     onAppointmentBooked(newAppointment);
     setStep(4);

@@ -4,7 +4,7 @@ import { BusinessSettings } from '../types';
 
 interface FooterProps {
   settings: BusinessSettings;
-  onNavigate: (view: 'client' | 'admin', sectionId?: string) => void;
+  onNavigate: (sectionId?: string) => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ settings, onNavigate }) => {
@@ -46,13 +46,15 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate }) => {
                 <ExternalLink className="w-3 h-3" />
               </a>
               <span>•</span>
-              <button
-                onClick={() => onNavigate('admin')}
-                className="hover:text-emerald-300 flex items-center gap-1 transition-colors cursor-pointer text-xs"
+              <a
+                href="https://square.site/appointments/buyer/widget/6jkiftssg2nhc1/L2N4AWWF3XG13"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-emerald-300 flex items-center gap-1 transition-colors text-xs text-emerald-400"
               >
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Admin Portal</span>
-              </button>
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Square Appointments Portal</span>
+              </a>
             </div>
           </div>
 
@@ -64,7 +66,7 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate }) => {
             <ul className="space-y-2 text-xs">
               <li>
                 <button
-                  onClick={() => onNavigate('client', 'about')}
+                  onClick={() => onNavigate('about')}
                   className="hover:text-emerald-300 transition-colors cursor-pointer"
                 >
                   About the Therapist
@@ -72,7 +74,7 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate }) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('client', 'services')}
+                  onClick={() => onNavigate('services')}
                   className="hover:text-emerald-300 transition-colors cursor-pointer"
                 >
                   Services Menu & Rates
@@ -80,7 +82,15 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate }) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('client', 'testimonials')}
+                  onClick={() => onNavigate('book')}
+                  className="hover:text-emerald-300 transition-colors cursor-pointer text-emerald-300 font-semibold"
+                >
+                  Book with Square
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('testimonials')}
                   className="hover:text-emerald-300 transition-colors cursor-pointer"
                 >
                   Client Reviews (5.0 ★)
@@ -88,7 +98,7 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate }) => {
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('client', 'policies')}
+                  onClick={() => onNavigate('policies')}
                   className="hover:text-emerald-300 transition-colors cursor-pointer"
                 >
                   Parking & Arrival Protocol

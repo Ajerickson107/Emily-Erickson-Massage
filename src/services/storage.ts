@@ -52,6 +52,14 @@ export const StorageService = {
     const list = this.getAppointments();
     const updated = [appointment, ...list.filter(a => a.id !== appointment.id)];
     localStorage.setItem(STORAGE_KEYS.APPOINTMENTS, JSON.stringify(updated));
+    // Asynchronously sync to Firestore for cross-device sync
+    try {
+      import('./firestoreSync').then(({ FirestoreSync }) => {
+        FirestoreSync.syncAppointment(appointment).catch(() => {});
+      }).catch(() => {});
+    } catch {
+      // ignore
+    }
   },
 
   updateAppointment(id: string, updates: Partial<Appointment>): Appointment | null {
@@ -61,6 +69,14 @@ export const StorageService = {
     const updated = { ...list[index], ...updates };
     list[index] = updated;
     localStorage.setItem(STORAGE_KEYS.APPOINTMENTS, JSON.stringify(list));
+    // Asynchronously update in Firestore
+    try {
+      import('./firestoreSync').then(({ FirestoreSync }) => {
+        FirestoreSync.updateAppointment(id, updates).catch(() => {});
+      }).catch(() => {});
+    } catch {
+      // ignore
+    }
     return updated;
   },
 
@@ -68,12 +84,24 @@ export const StorageService = {
     const list = this.getAppointments();
     const index = list.findIndex(a => a.id === id);
     if (index === -1) return false;
+    const cancellationReason = reason || 'Cancelled by client or admin';
     list[index] = {
       ...list[index],
       status: 'cancelled',
-      cancellationReason: reason || 'Cancelled by client or admin'
+      cancellationReason
     };
     localStorage.setItem(STORAGE_KEYS.APPOINTMENTS, JSON.stringify(list));
+    // Asynchronously update in Firestore
+    try {
+      import('./firestoreSync').then(({ FirestoreSync }) => {
+        FirestoreSync.updateAppointment(id, {
+          status: 'cancelled',
+          cancellationReason
+        }).catch(() => {});
+      }).catch(() => {});
+    } catch {
+      // ignore
+    }
     return true;
   },
 
@@ -81,6 +109,13 @@ export const StorageService = {
     const list = this.getAppointments();
     const filtered = list.filter(a => a.id !== id);
     localStorage.setItem(STORAGE_KEYS.APPOINTMENTS, JSON.stringify(filtered));
+    try {
+      import('./firestoreSync').then(({ FirestoreSync }) => {
+        FirestoreSync.deleteAppointment(id).catch(() => {});
+      }).catch(() => {});
+    } catch {
+      // ignore
+    }
     return true;
   },
 

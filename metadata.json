@@ -1,6 +1,6 @@
 {
   "name": "Emily Erickson Massage Therapy",
-  "description": "Licensed Massage Therapy by Emily Erickson, LMT in Rio Rancho, NM. Therapeutic deep tissue, targeted musculoskeletal relief, online booking, digital intake forms, and studio management.",
+  "description": "Licensed Massage Therapy by Emily Erickson, LMT in Rio Rancho, NM. Therapeutic deep tissue, modalities & rates, client reviews, studio policies, and direct Square Appointments booking.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

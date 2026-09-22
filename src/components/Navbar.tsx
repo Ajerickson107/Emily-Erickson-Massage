@@ -4,14 +4,12 @@ import { BusinessSettings } from '../types';
 
 interface NavbarProps {
   settings: BusinessSettings;
-  activeView: 'client' | 'admin';
-  onNavigate: (view: 'client' | 'admin', sectionId?: string) => void;
+  onNavigate: (sectionId?: string) => void;
   onOpenBooking: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   settings,
-  activeView,
   onNavigate,
   onOpenBooking
 }) => {
@@ -47,9 +45,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Main Navbar */}
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
-        {/* Brand identity - safe for small screens without cutting off */}
+        {/* Brand identity */}
         <button
-          onClick={() => onNavigate('client', 'hero')}
+          onClick={() => onNavigate('hero')}
           className="flex items-center gap-2 sm:gap-3 text-left group cursor-pointer focus:outline-none shrink-0"
         >
           <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-emerald-900 via-emerald-800 to-pink-600 flex items-center justify-center text-white shadow-inner shrink-0 group-hover:scale-105 transition-transform">
@@ -73,25 +71,31 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-6 lg:gap-7 text-sm font-semibold text-stone-300">
           <button
-            onClick={() => onNavigate('client', 'about')}
+            onClick={() => onNavigate('about')}
             className="hover:text-emerald-300 transition-colors cursor-pointer"
           >
             About Emily
           </button>
           <button
-            onClick={() => onNavigate('client', 'services')}
+            onClick={() => onNavigate('services')}
             className="hover:text-emerald-300 transition-colors cursor-pointer"
           >
             Services & Rates
           </button>
           <button
-            onClick={() => onNavigate('client', 'testimonials')}
+            onClick={() => onNavigate('book')}
+            className="hover:text-emerald-300 transition-colors cursor-pointer text-emerald-300"
+          >
+            Square Booking
+          </button>
+          <button
+            onClick={() => onNavigate('testimonials')}
             className="hover:text-emerald-300 transition-colors cursor-pointer"
           >
             Client Reviews
           </button>
           <button
-            onClick={() => onNavigate('client', 'policies')}
+            onClick={() => onNavigate('policies')}
             className="hover:text-emerald-300 transition-colors cursor-pointer"
           >
             Studio & Arrival Policies
@@ -99,36 +103,15 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Action Controls */}
-        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
-          {activeView === 'client' ? (
-            <>
-              <button
-                onClick={onOpenBooking}
-                className="bg-gradient-to-r from-emerald-800 to-emerald-700 hover:from-emerald-700 hover:to-emerald-600 text-white text-xs sm:text-sm font-bold px-2.5 py-2 sm:px-4 sm:py-2.5 rounded-lg shadow-sm transition-all flex items-center gap-1 sm:gap-2 cursor-pointer active:scale-95 whitespace-nowrap"
-              >
-                <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                <span className="hidden sm:inline">Book Appointment</span>
-                <span className="sm:hidden">Book Now</span>
-              </button>
-
-              <button
-                onClick={() => onNavigate('admin')}
-                title="Studio Admin Portal"
-                className="p-1.5 sm:p-2.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white border border-stone-700 transition-colors flex items-center gap-1.5 text-xs cursor-pointer"
-              >
-                <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-pink-400" />
-                <span className="hidden sm:inline font-medium">Admin</span>
-              </button>
-            </>
-          ) : (
-            <button
-              onClick={() => onNavigate('client')}
-              className="bg-stone-800 hover:bg-stone-700 text-white text-xs sm:text-sm font-medium px-3 py-2 sm:px-4 sm:py-2 rounded-lg border border-stone-600 transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer"
-            >
-              <User className="w-4 h-4 text-emerald-400" />
-              <span>Back to Client View</span>
-            </button>
-          )}
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            onClick={onOpenBooking}
+            className="bg-gradient-to-r from-emerald-800 to-emerald-700 hover:from-emerald-700 hover:to-emerald-600 text-white text-xs sm:text-sm font-bold px-3 py-2 sm:px-5 sm:py-2.5 rounded-xl shadow-sm transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer active:scale-95 whitespace-nowrap"
+          >
+            <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+            <span className="hidden sm:inline">Book via Square</span>
+            <span className="sm:hidden">Book Now</span>
+          </button>
         </div>
       </div>
     </header>

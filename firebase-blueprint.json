@@ -1,0 +1,61 @@
+{
+  "entities": {
+    "Appointment": {
+      "title": "Appointment",
+      "description": "A scheduled massage session with client intake and status",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "bookingReference": { "type": "string", "maxLength": 64 },
+        "serviceId": { "type": "string", "maxLength": 64 },
+        "serviceName": { "type": "string", "maxLength": 128 },
+        "durationMinutes": { "type": "number" },
+        "date": { "type": "string", "maxLength": 16 },
+        "timeSlot": { "type": "string", "maxLength": 32 },
+        "endTime": { "type": "string", "maxLength": 32 },
+        "selectedEnhancements": { "type": "array" },
+        "totalPrice": { "type": "number" },
+        "status": { "type": "string", "maxLength": 32 },
+        "paymentStatus": { "type": "string", "maxLength": 32 },
+        "squareTransactionId": { "type": "string", "maxLength": 128 },
+        "squarePaymentMethod": { "type": "string", "maxLength": 64 },
+        "intakeForm": { "type": "object" },
+        "therapistNotes": { "type": "string", "maxLength": 2048 },
+        "cancellationReason": { "type": "string", "maxLength": 1024 },
+        "createdAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "serviceName", "date", "timeSlot", "status", "intakeForm"]
+    },
+    "BusinessSettings": {
+      "title": "BusinessSettings",
+      "description": "Studio operating configuration and policies",
+      "type": "object",
+      "properties": {
+        "businessName": { "type": "string", "maxLength": 128 },
+        "leadTherapist": { "type": "string", "maxLength": 128 },
+        "lmtLicense": { "type": "string", "maxLength": 64 },
+        "phone": { "type": "string", "maxLength": 32 },
+        "email": { "type": "string", "maxLength": 128 },
+        "address": { "type": "string", "maxLength": 256 },
+        "neighborhood": { "type": "string", "maxLength": 128 },
+        "cityStateZip": { "type": "string", "maxLength": 128 },
+        "bufferMinutes": { "type": "number" },
+        "operatingHours": { "type": "object" },
+        "parkingInstructions": { "type": "string", "maxLength": 2048 },
+        "arrivalPolicy": { "type": "string", "maxLength": 2048 },
+        "cancellationPolicy": { "type": "string", "maxLength": 2048 },
+        "squareSettings": { "type": "object" }
+      }
+    }
+  },
+  "firestore": {
+    "/appointments/{appointmentId}": {
+      "schema": { "$ref": "#/entities/Appointment" },
+      "description": "Client scheduled massage therapy appointments"
+    },
+    "/settings/{settingId}": {
+      "schema": { "$ref": "#/entities/BusinessSettings" },
+      "description": "Studio configuration settings"
+    }
+  }
+}

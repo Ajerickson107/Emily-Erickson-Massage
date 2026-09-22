@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { Service, Enhancement, BusinessSettings } from '../../types';
 import { StorageService } from '../../services/storage';
+import { FirestoreSync } from '../../services/firestoreSync';
 
 interface BusinessSettingsEditorProps {
   services: Service[];
@@ -41,6 +42,7 @@ export const BusinessSettingsEditor: React.FC<BusinessSettingsEditorProps> = ({
   const handleSaveAll = () => {
     // Save settings
     StorageService.saveSettings(localSettings);
+    FirestoreSync.syncSettings(localSettings).catch(() => {});
 
     // Save services
     localServices.forEach(srv => {

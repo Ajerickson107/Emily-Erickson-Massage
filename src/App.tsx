@@ -3,65 +3,37 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { AboutEmily } from './components/AboutEmily';
 import { ServicesMenu } from './components/ServicesMenu';
+import { SquareBookingSection } from './components/SquareBookingSection';
+import { SquareBookingModal } from './components/SquareBookingModal';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { LocationPolicies } from './components/LocationPolicies';
 import { Footer } from './components/Footer';
-import { BookingFlow } from './components/BookingFlow';
-import { AdminDashboard } from './components/admin/AdminDashboard';
-import { AdminLoginModal } from './components/admin/AdminLoginModal';
 import { StorageService } from './services/storage';
 import {
   Service,
   Enhancement,
   Testimonial,
   BusinessSettings,
-  Appointment,
   DurationOption
 } from './types';
 
 export default function App() {
-  const [activeView, setActiveView] = useState<'client' | 'admin'>('client');
   const [services, setServices] = useState<Service[]>([]);
   const [enhancements, setEnhancements] = useState<Enhancement[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [settings, setSettings] = useState<BusinessSettings>(StorageService.getSettings());
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
 
-  // Booking Flow modal state
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [bookingPreselect, setBookingPreselect] = useState<{
-    serviceId?: string;
-    duration?: DurationOption;
-  }>({});
+  // Square Booking Modal state (for direct modal popup booking)
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
-  // Admin login modal state
-  const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
-
-  // Reload data from LocalStorage
-  const refreshAllData = () => {
+  useEffect(() => {
     setServices(StorageService.getServices());
     setEnhancements(StorageService.getEnhancements());
     setTestimonials(StorageService.getTestimonials());
     setSettings(StorageService.getSettings());
-    setAppointments(StorageService.getAppointments());
-  };
-
-  useEffect(() => {
-    refreshAllData();
   }, []);
 
-  const handleNavigate = (view: 'client' | 'admin', sectionId?: string) => {
-    if (view === 'admin') {
-      if (StorageService.isAdminAuthenticated()) {
-        setActiveView('admin');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        setIsAdminLoginOpen(true);
-      }
-      return;
-    }
-
-    setActiveView('client');
+  const handleNavigate = (sectionId?: string) => {
     if (sectionId) {
       setTimeout(() => {
         const elem = document.getElementById(sectionId);
@@ -74,13 +46,14 @@ export default function App() {
     }
   };
 
-  const handleOpenBooking = (serviceId?: string, duration: DurationOption = 60) => {
-    setBookingPreselect({ serviceId, duration });
-    setIsBookingOpen(true);
-  };
-
-  const handleAppointmentBooked = (newAppt: Appointment) => {
-    refreshAllData();
+  const handleOpenBooking = (_serviceId?: string, _duration: DurationOption = 60) => {
+    // Navigate smoothly to the embedded Square Booking Section, or open the modal
+    const bookElem = document.getElementById('book');
+    if (bookElem) {
+      bookElem.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      setIsBookingModalOpen(true);
+    }
   };
 
   return (
@@ -88,77 +61,51 @@ export default function App() {
       {/* Top Navigation */}
       <Navbar
         settings={settings}
-        activeView={activeView}
         onNavigate={handleNavigate}
         onOpenBooking={() => handleOpenBooking()}
       />
 
-      {/* Main View Router */}
+      {/* Main Single-Page Client View */}
       <main className="flex-1">
-        {activeView === 'client' ? (
-          <>
-            <Hero
-              settings={settings}
-              onBookNow={() => handleOpenBooking()}
-              onExploreServices={() => handleNavigate('client', 'services')}
-            />
+        <Hero
+          settings={settings}
+          onBookNow={() => handleOpenBooking()}
+          onExploreServices={() => handleNavigate('services')}
+        />
 
-            <AboutEmily
-              settings={settings}
-              onBookNow={() => handleOpenBooking()}
-            />
+        <AboutEmily
+          settings={settings}
+          onBookNow={() => handleOpenBooking()}
+        />
 
-            <ServicesMenu
-              services={services}
-              enhancements={enhancements}
-              onSelectServiceForBooking={(sId, dur) => handleOpenBooking(sId, dur)}
-            />
-
-            <TestimonialsSection
-              testimonials={testimonials}
-              onBookNow={() => handleOpenBooking()}
-            />
-
-            <LocationPolicies
-              settings={settings}
-              onBookNow={() => handleOpenBooking()}
-            />
-          </>
-        ) : (
-          <AdminDashboard
-            appointments={appointments}
-            services={services}
-            enhancements={enhancements}
-            settings={settings}
-            onReturnToClientView={() => setActiveView('client')}
-            onRefreshData={refreshAllData}
-          />
-        )}
-      </main>
-
-      {/* Booking Flow Modal */}
-      {isBookingOpen && (
-        <BookingFlow
+        <ServicesMenu
           services={services}
           enhancements={enhancements}
+          onSelectServiceForBooking={(_sId, _dur) => handleOpenBooking()}
+        />
+
+        {/* Embedded Square Appointments Booking Portal */}
+        <SquareBookingSection settings={settings} />
+
+        <TestimonialsSection
+          testimonials={testimonials}
+          onBookNow={() => handleOpenBooking()}
+        />
+
+        <LocationPolicies
           settings={settings}
-          preSelectedServiceId={bookingPreselect.serviceId}
-          preSelectedDuration={bookingPreselect.duration}
-          onClose={() => setIsBookingOpen(false)}
-          onAppointmentBooked={handleAppointmentBooked}
+          onBookNow={() => handleOpenBooking()}
+        />
+      </main>
+
+      {/* Square Booking Modal for instant overlay access */}
+      {isBookingModalOpen && (
+        <SquareBookingModal
+          isOpen={isBookingModalOpen}
+          settings={settings}
+          onClose={() => setIsBookingModalOpen(false)}
         />
       )}
-
-      {/* Admin Login Modal */}
-      <AdminLoginModal
-        isOpen={isAdminLoginOpen}
-        onClose={() => setIsAdminLoginOpen(false)}
-        onLoginSuccess={() => {
-          setIsAdminLoginOpen(false);
-          setActiveView('admin');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-      />
 
       {/* Footer */}
       <Footer

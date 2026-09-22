@@ -78,6 +78,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 <span className="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-700/60 px-2 py-0.5 rounded font-mono">
                   Rio Rancho, NM
                 </span>
+                <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded font-mono flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Cloud Sync Live
+                </span>
               </div>
               <p className="text-xs text-stone-400">
                 Emily Erickson, LMT — Studio Administration
