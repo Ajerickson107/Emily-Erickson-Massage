@@ -3,8 +3,6 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { AboutEmily } from './components/AboutEmily';
 import { ServicesMenu } from './components/ServicesMenu';
-import { SquareBookingSection } from './components/SquareBookingSection';
-import { SquareBookingModal } from './components/SquareBookingModal';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { LocationPolicies } from './components/LocationPolicies';
 import { Footer } from './components/Footer';
@@ -14,7 +12,8 @@ import {
   Enhancement,
   Testimonial,
   BusinessSettings,
-  DurationOption
+  DurationOption,
+  SQUARE_BOOKING_URL
 } from './types';
 
 export default function App() {
@@ -22,9 +21,6 @@ export default function App() {
   const [enhancements, setEnhancements] = useState<Enhancement[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [settings, setSettings] = useState<BusinessSettings>(StorageService.getSettings());
-
-  // Square Booking Modal state (for direct modal popup booking)
-  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   useEffect(() => {
     setServices(StorageService.getServices());
@@ -47,13 +43,8 @@ export default function App() {
   };
 
   const handleOpenBooking = (_serviceId?: string, _duration: DurationOption = 60) => {
-    // Navigate smoothly to the embedded Square Booking Section, or open the modal
-    const bookElem = document.getElementById('book');
-    if (bookElem) {
-      bookElem.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      setIsBookingModalOpen(true);
-    }
+    // Directly redirect to official Square Appointments portal in a secure new tab
+    window.open(SQUARE_BOOKING_URL, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -84,9 +75,6 @@ export default function App() {
           onSelectServiceForBooking={(_sId, _dur) => handleOpenBooking()}
         />
 
-        {/* Embedded Square Appointments Booking Portal */}
-        <SquareBookingSection settings={settings} />
-
         <TestimonialsSection
           testimonials={testimonials}
           onBookNow={() => handleOpenBooking()}
@@ -98,19 +86,11 @@ export default function App() {
         />
       </main>
 
-      {/* Square Booking Modal for instant overlay access */}
-      {isBookingModalOpen && (
-        <SquareBookingModal
-          isOpen={isBookingModalOpen}
-          settings={settings}
-          onClose={() => setIsBookingModalOpen(false)}
-        />
-      )}
-
       {/* Footer */}
       <Footer
         settings={settings}
         onNavigate={handleNavigate}
+        onOpenBooking={() => handleOpenBooking()}
       />
     </div>
   );

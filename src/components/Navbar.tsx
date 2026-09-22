@@ -1,6 +1,6 @@
 import React from 'react';
-import { Sparkles, Phone, MapPin, Calendar, ShieldCheck, User } from 'lucide-react';
-import { BusinessSettings } from '../types';
+import { Sparkles, Phone, MapPin, Calendar, ShieldCheck, User, ExternalLink } from 'lucide-react';
+import { BusinessSettings, SQUARE_BOOKING_URL } from '../types';
 
 interface NavbarProps {
   settings: BusinessSettings;
@@ -82,12 +82,15 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             Services & Rates
           </button>
-          <button
-            onClick={() => onNavigate('book')}
-            className="hover:text-emerald-300 transition-colors cursor-pointer text-emerald-300"
+          <a
+            href={SQUARE_BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-emerald-300 transition-colors cursor-pointer text-emerald-300 flex items-center gap-1"
           >
-            Square Booking
-          </button>
+            <span>Book Online</span>
+            <ExternalLink className="w-3 h-3 opacity-75" />
+          </a>
           <button
             onClick={() => onNavigate('testimonials')}
             className="hover:text-emerald-300 transition-colors cursor-pointer"
@@ -104,14 +107,16 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Action Controls */}
         <div className="flex items-center gap-2 shrink-0">
-          <button
-            onClick={onOpenBooking}
+          <a
+            href={SQUARE_BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-gradient-to-r from-emerald-800 to-emerald-700 hover:from-emerald-700 hover:to-emerald-600 text-white text-xs sm:text-sm font-bold px-3 py-2 sm:px-5 sm:py-2.5 rounded-xl shadow-sm transition-all flex items-center gap-1.5 sm:gap-2 cursor-pointer active:scale-95 whitespace-nowrap"
           >
             <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
             <span className="hidden sm:inline">Book via Square</span>
             <span className="sm:hidden">Book Now</span>
-          </button>
+          </a>
         </div>
       </div>
     </header>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Sparkles, Clock, Check, Plus, ArrowRight, ShieldCheck, Flame, Compass } from 'lucide-react';
-import { Service, Enhancement, DurationOption } from '../types';
+import { Service, Enhancement, DurationOption, SQUARE_BOOKING_URL } from '../types';
 
 interface ServicesMenuProps {
   services: Service[];
@@ -138,13 +138,15 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({
                     <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
                     <span>Includes intake consultation & buffer</span>
                   </div>
-                  <button
-                    onClick={() => onSelectServiceForBooking(service.id, selectedDuration)}
+                  <a
+                    href={SQUARE_BOOKING_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="bg-gradient-to-r from-emerald-900 via-emerald-800 to-pink-700 hover:from-emerald-800 hover:to-pink-600 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer active:scale-98"
                   >
                     <span>Book {selectedDuration}m Session</span>
                     <ArrowRight className="w-4 h-4" />
-                  </button>
+                  </a>
                 </div>
               </div>
             );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapPin, Clock, Car, Phone, Mail, ShieldAlert, Sparkles, Navigation, CheckCircle2 } from 'lucide-react';
-import { BusinessSettings } from '../types';
+import { BusinessSettings, SQUARE_BOOKING_URL } from '../types';
 
 interface LocationPoliciesProps {
   settings: BusinessSettings;
@@ -204,12 +204,14 @@ export const LocationPolicies: React.FC<LocationPoliciesProps> = ({
                 </p>
               </div>
 
-              <button
-                onClick={onBookNow}
-                className="w-full bg-gradient-to-r from-emerald-900 via-emerald-800 to-pink-700 hover:from-emerald-800 hover:to-pink-600 text-white font-bold py-3.5 rounded-xl transition-all shadow-md text-sm cursor-pointer text-center"
+              <a
+                href={SQUARE_BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-gradient-to-r from-emerald-900 via-emerald-800 to-pink-700 hover:from-emerald-800 hover:to-pink-600 text-white font-bold py-3.5 rounded-xl transition-all shadow-md text-sm cursor-pointer text-center block"
               >
                 Book Your 60 or 90 Min Appointment
-              </button>
+              </a>
             </div>
           </div>
         </div>

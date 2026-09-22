@@ -1,6 +1,6 @@
 import React from 'react';
 import { ShieldCheck, MapPin, Sparkles, Clock, ArrowRight, CheckCircle2, Calendar, Heart } from 'lucide-react';
-import { BusinessSettings } from '../types';
+import { BusinessSettings, SQUARE_BOOKING_URL } from '../types';
 import { EmilyPortrait } from './EmilyPortrait';
 
 interface HeroProps {
@@ -65,14 +65,16 @@ export const Hero: React.FC<HeroProps> = ({
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-3">
-              <button
-                onClick={onBookNow}
+              <a
+                href={SQUARE_BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-gradient-to-r from-emerald-800 via-emerald-700 to-pink-700 hover:from-emerald-700 hover:to-pink-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg shadow-emerald-950/50 hover:shadow-pink-950/40 transition-all flex items-center justify-center gap-2 text-sm sm:text-base cursor-pointer group active:scale-98"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Book Your Session</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </a>
 
               <button
                 onClick={onExploreServices}

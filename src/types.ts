@@ -1,5 +1,7 @@
 export type DurationOption = 60 | 90;
 
+export const SQUARE_BOOKING_URL = 'https://square.site/appointments/buyer/widget/6jkiftssg2nhc1/L2N4AWWF3XG13';
+
 export interface Service {
   id: string;
   name: string;

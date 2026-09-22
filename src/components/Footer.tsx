@@ -1,10 +1,11 @@
 import React from 'react';
 import { Sparkles, Phone, Mail, MapPin, ExternalLink, ShieldCheck } from 'lucide-react';
-import { BusinessSettings } from '../types';
+import { BusinessSettings, SQUARE_BOOKING_URL } from '../types';
 
 interface FooterProps {
   settings: BusinessSettings;
   onNavigate: (sectionId?: string) => void;
+  onOpenBooking?: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ settings, onNavigate }) => {
@@ -81,12 +82,15 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate }) => {
                 </button>
               </li>
               <li>
-                <button
-                  onClick={() => onNavigate('book')}
-                  className="hover:text-emerald-300 transition-colors cursor-pointer text-emerald-300 font-semibold"
+                <a
+                  href={SQUARE_BOOKING_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-emerald-300 transition-colors cursor-pointer text-emerald-300 font-semibold flex items-center gap-1"
                 >
-                  Book with Square
-                </button>
+                  <span>Book with Square</span>
+                  <ExternalLink className="w-3 h-3 opacity-80" />
+                </a>
               </li>
               <li>
                 <button
