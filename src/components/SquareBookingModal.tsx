@@ -17,7 +17,7 @@ export const SquareBookingModal: React.FC<SquareBookingModalProps> = ({
 
   if (!isOpen) return null;
 
-  const squareBookingFlowUrl = 'https://book.squareup.com/appointments/6jkiftssg2nhc1/location/L2N4AWWF3XG13';
+  const squareBookingFlowUrl = '/appointments/6jkiftssg2nhc1/location/L2N4AWWF3XG13';
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-stone-950/80 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4">
@@ -67,7 +67,6 @@ export const SquareBookingModal: React.FC<SquareBookingModalProps> = ({
               title="Emily Erickson Massage Therapy Square Booking"
               className="w-full min-h-[640px] border-0 rounded-2xl bg-white"
               allow="payment; payment https://book.squareup.com; payment https://app.squareup.com; clipboard-write; geolocation"
-              sandbox="allow-scripts allow-same-origin allow-forms allow-popups-to-escape-sandbox allow-modals"
               onLoad={() => setIframeLoaded(true)}
             />
           </div>

@@ -9,10 +9,8 @@ interface SquareBookingSectionProps {
 export const SquareBookingSection: React.FC<SquareBookingSectionProps> = ({ settings }) => {
   const [iframeLoaded, setIframeLoaded] = useState(false);
 
-  // Direct responsive appointment booking URL on Square's booking host
-  // This loads the interactive booking engine (service selection, calendar picker, time slots, intake, and checkout)
-  // directly inside the iframe without redirecting out to a new tab.
-  const squareBookingFlowUrl = 'https://book.squareup.com/appointments/6jkiftssg2nhc1/location/L2N4AWWF3XG13';
+  // In-site Square Appointments route - neutralized so service selection, details, and booking happen directly inside the website
+  const squareBookingFlowUrl = '/appointments/6jkiftssg2nhc1/location/L2N4AWWF3XG13';
 
   return (
     <section id="book" className="py-16 sm:py-24 bg-stone-900 text-stone-100 relative overflow-hidden border-b border-stone-800">
@@ -83,7 +81,6 @@ export const SquareBookingSection: React.FC<SquareBookingSectionProps> = ({ sett
               title="Emily Erickson Massage Therapy Square Appointments"
               className="w-full min-h-[680px] sm:min-h-[780px] border-0 rounded-2xl bg-white"
               allow="payment; payment https://book.squareup.com; payment https://app.squareup.com; clipboard-write; geolocation"
-              sandbox="allow-scripts allow-same-origin allow-forms allow-popups-to-escape-sandbox allow-modals"
               onLoad={() => setIframeLoaded(true)}
             />
           </div>
