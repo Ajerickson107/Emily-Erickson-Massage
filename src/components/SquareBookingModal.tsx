@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { X, Sparkles, ShieldCheck, RefreshCw, Calendar } from 'lucide-react';
+import React from 'react';
+import { X, Sparkles, ShieldCheck } from 'lucide-react';
 import { BusinessSettings } from '../types';
+import SquareBookingWidget from './SquareBookingWidget';
 
 interface SquareBookingModalProps {
   isOpen: boolean;
@@ -10,14 +11,10 @@ interface SquareBookingModalProps {
 
 export const SquareBookingModal: React.FC<SquareBookingModalProps> = ({
   isOpen,
-  settings,
+  settings: _settings,
   onClose
 }) => {
-  const [iframeLoaded, setIframeLoaded] = useState(false);
-
   if (!isOpen) return null;
-
-  const squareBookingFlowUrl = '/appointments/6jkiftssg2nhc1/location/L2N4AWWF3XG13';
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-stone-950/80 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4">
@@ -32,7 +29,7 @@ export const SquareBookingModal: React.FC<SquareBookingModalProps> = ({
               <h3 className="text-base font-bold text-white flex items-center gap-2">
                 <span>Book with Emily Erickson, LMT</span>
                 <span className="text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-1.5 py-0.5 rounded font-mono uppercase">
-                  Square Portal
+                  Square Appointments
                 </span>
               </h3>
               <p className="text-xs text-stone-400">
@@ -52,23 +49,10 @@ export const SquareBookingModal: React.FC<SquareBookingModalProps> = ({
           </div>
         </div>
 
-        {/* Modal Body: Direct interactive booking flow */}
+        {/* Modal Body: Standard Native Square Widget */}
         <div className="p-2 sm:p-6 overflow-y-auto flex-1 bg-stone-50/50 flex flex-col items-center">
-          <div className="w-full relative rounded-2xl bg-white border border-stone-200 overflow-hidden min-h-[620px] flex flex-col">
-            {!iframeLoaded && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-stone-50 text-stone-500 gap-3 z-10">
-                <RefreshCw className="w-6 h-6 text-emerald-700 animate-spin" />
-                <span className="text-xs font-medium">Loading Square Appointments...</span>
-              </div>
-            )}
-
-            <iframe
-              src={squareBookingFlowUrl}
-              title="Emily Erickson Massage Therapy Square Booking"
-              className="w-full min-h-[640px] border-0 rounded-2xl bg-white"
-              allow="payment; payment https://book.squareup.com; payment https://app.squareup.com; clipboard-write; geolocation"
-              onLoad={() => setIframeLoaded(true)}
-            />
+          <div className="w-full relative rounded-2xl bg-white border border-stone-200 overflow-hidden min-h-[700px] flex flex-col p-2">
+            <SquareBookingWidget />
           </div>
         </div>
 

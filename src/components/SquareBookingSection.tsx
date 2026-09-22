@@ -1,17 +1,13 @@
-import React, { useState } from 'react';
-import { Sparkles, ShieldCheck, CreditCard, Clock, Calendar, RefreshCw } from 'lucide-react';
+import React from 'react';
+import { Sparkles, ShieldCheck, CreditCard, Clock, Calendar } from 'lucide-react';
 import { BusinessSettings } from '../types';
+import SquareBookingWidget from './SquareBookingWidget';
 
 interface SquareBookingSectionProps {
   settings: BusinessSettings;
 }
 
 export const SquareBookingSection: React.FC<SquareBookingSectionProps> = ({ settings }) => {
-  const [iframeLoaded, setIframeLoaded] = useState(false);
-
-  // In-site Square Appointments route - neutralized so service selection, details, and booking happen directly inside the website
-  const squareBookingFlowUrl = '/appointments/6jkiftssg2nhc1/location/L2N4AWWF3XG13';
-
   return (
     <section id="book" className="py-16 sm:py-24 bg-stone-900 text-stone-100 relative overflow-hidden border-b border-stone-800">
       {/* Ambient background accents */}
@@ -23,7 +19,7 @@ export const SquareBookingSection: React.FC<SquareBookingSectionProps> = ({ sett
         <div className="text-center max-w-3xl mx-auto mb-10">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-800/60 text-emerald-300 text-xs font-semibold uppercase tracking-wider mb-3 shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Direct Square Appointments Booking</span>
+            <span>Square Appointments Booking</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
@@ -31,7 +27,7 @@ export const SquareBookingSection: React.FC<SquareBookingSectionProps> = ({ sett
           </h2>
 
           <p className="mt-3 text-sm sm:text-base text-stone-300 font-normal leading-relaxed max-w-2xl mx-auto">
-            Book your therapeutic massage session right here on the website. Select your service, pick your date and time, and confirm your appointment with Square.
+            Book your therapeutic massage session directly below. Select your service, pick your date and time, and confirm your appointment with Square.
           </p>
 
           {/* Key trust badges */}
@@ -63,26 +59,13 @@ export const SquareBookingSection: React.FC<SquareBookingSectionProps> = ({ sett
             </div>
             <div className="flex items-center gap-2 text-xs text-stone-500">
               <Calendar className="w-3.5 h-3.5 text-emerald-700" />
-              <span>Select your date & time below to complete booking</span>
+              <span>Select your service, date & time below</span>
             </div>
           </div>
 
-          {/* Fully interactive, embedded booking experience right on the page */}
-          <div className="w-full relative rounded-2xl bg-stone-50 border border-stone-200 overflow-hidden min-h-[680px] sm:min-h-[760px] flex flex-col">
-            {!iframeLoaded && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-stone-50 text-stone-500 gap-3 z-10">
-                <RefreshCw className="w-6 h-6 text-emerald-700 animate-spin" />
-                <span className="text-xs font-medium">Connecting to Square Appointments...</span>
-              </div>
-            )}
-
-            <iframe
-              src={squareBookingFlowUrl}
-              title="Emily Erickson Massage Therapy Square Appointments"
-              className="w-full min-h-[680px] sm:min-h-[780px] border-0 rounded-2xl bg-white"
-              allow="payment; payment https://book.squareup.com; payment https://app.squareup.com; clipboard-write; geolocation"
-              onLoad={() => setIframeLoaded(true)}
-            />
+          {/* Standard Native Square Booking Widget */}
+          <div className="w-full relative rounded-2xl bg-stone-50 border border-stone-200 overflow-hidden min-h-[700px] flex flex-col p-2">
+            <SquareBookingWidget />
           </div>
 
           {/* Card Footer notice */}
