@@ -210,7 +210,7 @@ export const INITIAL_TESTIMONIALS: Testimonial[] = [
 ];
 
 export const INITIAL_BUSINESS_SETTINGS: BusinessSettings = {
-  businessName: 'Emily Erickson Massage Therapy',
+  businessName: 'Emily Erickson Massage',
   leadTherapist: 'Emily Erickson, LMT',
   lmtLicense: 'MT-2025-0039',
   phone: '(505) 615-6043',
@@ -220,13 +220,13 @@ export const INITIAL_BUSINESS_SETTINGS: BusinessSettings = {
   cityStateZip: 'Rio Rancho, NM 87144',
   bufferMinutes: 15, // 15-minute sanitization buffer between clients
   operatingHours: {
-    Saturday: { isOpen: true, start: '9:00 AM', end: '6:00 PM' },
     Sunday: { isOpen: true, start: '9:00 AM', end: '6:00 PM' },
     Monday: { isOpen: true, start: '9:00 AM', end: '6:00 PM' },
-    Tuesday: { isOpen: false, start: '9:00 AM', end: '6:00 PM' },
+    Tuesday: { isOpen: true, start: '9:00 AM', end: '6:00 PM' },
     Wednesday: { isOpen: false, start: '9:00 AM', end: '6:00 PM' },
     Thursday: { isOpen: false, start: '9:00 AM', end: '6:00 PM' },
-    Friday: { isOpen: false, start: '9:00 AM', end: '6:00 PM' },
+    Friday: { isOpen: true, start: '9:00 AM', end: '6:00 PM' },
+    Saturday: { isOpen: true, start: '9:00 AM', end: '6:00 PM' },
   },
   parkingInstructions: 'Please park directly in the designated driveway space or along the street curbing directly in front of 2807 Cambridge Ave. Please do not block neighboring driveways.',
   arrivalPolicy: 'To preserve complete privacy for the client before you and ensure Emily has adequate time for medical sanitization and room reset, please remain comfortably in your vehicle until your exact scheduled appointment time. Emily will greet you at the front entrance when ready.',

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Sparkles, Phone, MapPin, Calendar, ShieldCheck, User, ExternalLink } from 'lucide-react';
+import { Phone, MapPin, Calendar, ShieldCheck, User, ExternalLink } from 'lucide-react';
 import { BusinessSettings, SQUARE_BOOKING_URL } from '../types';
+import { BrandLogo } from './BrandLogo';
 
 interface NavbarProps {
   settings: BusinessSettings;
@@ -23,8 +24,8 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
           <div className="flex items-center gap-2 min-w-0">
             <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
-            <span className="truncate hidden sm:inline font-medium">Private Home Studio in Rio Rancho, NM • By Appointment Only (Sat, Sun & Mon)</span>
-            <span className="truncate sm:hidden text-[11px] font-medium">Rio Rancho Studio • Sat, Sun & Mon by Appt</span>
+            <span className="truncate hidden sm:inline font-medium">Private Home Studio in Rio Rancho, NM • Open Friday – Tuesday</span>
+            <span className="truncate sm:hidden text-[11px] font-medium">Rio Rancho Studio • Open Friday – Tuesday</span>
           </div>
           <div className="flex items-center gap-3 text-xs text-stone-300 shrink-0">
             <a
@@ -50,13 +51,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           onClick={() => onNavigate('hero')}
           className="flex items-center gap-2 sm:gap-3 text-left group cursor-pointer focus:outline-none shrink-0"
         >
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-emerald-900 via-emerald-800 to-pink-600 flex items-center justify-center text-white shadow-inner shrink-0 group-hover:scale-105 transition-transform">
-            <Sparkles className="w-4 h-4 text-emerald-100" />
-          </div>
+          <BrandLogo size="md" />
           <div className="flex flex-col">
             <div className="flex items-center gap-1 sm:gap-1.5">
               <span className="text-sm sm:text-lg font-bold text-white group-hover:text-emerald-300 transition-colors whitespace-nowrap">
-                Emily Erickson
+                Emily Erickson Massage
               </span>
               <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-wider bg-emerald-950 text-emerald-300 px-1.5 py-0.5 rounded border border-emerald-800 shrink-0">
                 LMT

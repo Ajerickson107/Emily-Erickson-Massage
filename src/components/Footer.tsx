@@ -1,6 +1,7 @@
 import React from 'react';
-import { Sparkles, Phone, Mail, MapPin, ExternalLink, ShieldCheck } from 'lucide-react';
+import { Phone, Mail, MapPin, ExternalLink, ShieldCheck } from 'lucide-react';
 import { BusinessSettings, SQUARE_BOOKING_URL } from '../types';
+import { BrandLogo } from './BrandLogo';
 
 interface FooterProps {
   settings: BusinessSettings;
@@ -19,12 +20,10 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate }) => {
           {/* Brand info */}
           <div className="space-y-4 md:col-span-2">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-600 to-pink-600 flex items-center justify-center text-white shadow-xs">
-                <Sparkles className="w-5 h-5 text-emerald-100" />
-              </div>
+              <BrandLogo size="md" />
               <div>
                 <span className="text-xl font-bold text-white">
-                  Emily Erickson
+                  Emily Erickson Massage
                 </span>
                 <p className="text-xs text-stone-400">
                   Licensed Massage Therapist • Rio Rancho, NM
@@ -138,8 +137,8 @@ export const Footer: React.FC<FooterProps> = ({ settings, onNavigate }) => {
         </div>
 
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500 gap-4">
-          <p>© {new Date().getFullYear()} Emily Erickson Massage Therapy. All rights reserved.</p>
-          <p>Rio Rancho, NM • Open Saturday, Sunday & Monday by Appointment.</p>
+          <p>© {new Date().getFullYear()} Emily Erickson Massage LLC. All rights reserved.</p>
+          <p>Rio Rancho, NM • Open Friday – Tuesday by Appointment.</p>
         </div>
       </div>
     </footer>

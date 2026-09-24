@@ -149,7 +149,7 @@ export const AboutEmily: React.FC<AboutEmilyProps> = ({
                 </div>
                 <div className="flex items-center justify-between py-2 border-b border-stone-100">
                   <span className="text-stone-500 font-medium">Operating Days</span>
-                  <span className="font-bold text-stone-900">Saturday, Sunday & Monday</span>
+                  <span className="font-bold text-stone-900">Friday – Tuesday</span>
                 </div>
                 <div className="flex items-center justify-between py-2 border-b border-stone-100">
                   <span className="text-stone-500 font-medium">Client Protocol</span>

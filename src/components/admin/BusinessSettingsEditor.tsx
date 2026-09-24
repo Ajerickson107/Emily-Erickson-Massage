@@ -82,7 +82,7 @@ export const BusinessSettingsEditor: React.FC<BusinessSettingsEditorProps> = ({
             Content & Studio Settings
           </h3>
           <p className="text-xs text-stone-500">
-            Emily Erickson Massage Therapy — Operational Configuration
+            Emily Erickson Massage — Operational Configuration
           </p>
         </div>
 

@@ -54,11 +54,11 @@ export const Hero: React.FC<HeroProps> = ({
                 <span>{settings.bufferMinutes}-minute sanitization buffer between clients</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-pink-400 flex-shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
                 <span>Unrushed 60 & 90-minute treatment slots</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-pink-400 flex-shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
                 <span>Secure online Square payment upon booking</span>
               </div>
             </div>
@@ -97,7 +97,7 @@ export const Hero: React.FC<HeroProps> = ({
               </div>
               <div className="p-2.5 rounded-xl bg-stone-900/85 border border-stone-800/90 text-center sm:text-left">
                 <span className="text-stone-400 block text-[10px] uppercase font-semibold tracking-wider mb-0.5">Schedule</span>
-                <span className="font-bold text-xs text-pink-300 block leading-tight">Sat, Sun & Mon</span>
+                <span className="font-bold text-xs text-emerald-300 block leading-tight">Friday – Tuesday</span>
               </div>
             </div>
           </div>

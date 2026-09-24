@@ -18,11 +18,11 @@ import {
 } from '../data/initialData';
 
 const STORAGE_KEYS = {
-  APPOINTMENTS: 'eemt_appointments_v2',
-  SERVICES: 'eemt_services_v2',
-  ENHANCEMENTS: 'eemt_enhancements_v2',
-  SETTINGS: 'eemt_settings_v2',
-  TESTIMONIALS: 'eemt_testimonials_v2',
+  APPOINTMENTS: 'eemt_appointments_v3',
+  SERVICES: 'eemt_services_v3',
+  ENHANCEMENTS: 'eemt_enhancements_v3',
+  SETTINGS: 'eemt_settings_v3',
+  TESTIMONIALS: 'eemt_testimonials_v3',
   ADMIN_AUTH: 'eemt_admin_auth_v1',
   ADMIN_SESSION: 'eemt_admin_session_v1'
 };
